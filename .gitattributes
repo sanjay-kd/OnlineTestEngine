@@ -1,2 +1,2 @@
 *.css linguist-language=Java
-project-docs/poi linguist-documentation
+project-docs/poi/poi-3.17 linguist-documentation
