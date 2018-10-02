@@ -1,0 +1,191 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh15580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs50 \cf0 Flow Graph in TestEngine Java Project
+\b0 \
+\
+
+\fs42 First show a splashScreen.\
+Then the registerScreen comes by default and there we have option to navigate to Login Screen if we are already registered. If not registered yet then register and along with Registration Successful message we show user to Login_Now option.\
+After Registration is Successful User will login and after the login Screen he will be shown a DashBoard_Screen ( Dynamic Screen ).\
+\
+\
+****************************** Different Screens and Their Task *******************************************\
+\
+
+\b Registration_Screen\
+
+\b0 \
+This screen will have following field : -\
+1. FullName\
+2. userID (or userRollNo)\
+3. Password\
+4. ConfirmPassword\
+5. Gender RadioButton\
+6. Email_Id\
+7. City DropBox\
+\
+\
+
+\b Login_Screen
+\b0 \
+This screen will have following fields : - \
+1. userID ( or userRollNo )\
+2. Password\
+\
+\
+
+\b DashBoard_Screen
+\b0 \
+This will be a single screen only for all three cases(at the bottom) but the options that will be visible will be changed dynamically that is depending on type of user that will login OR depending upon the right the user have.\
+\
+\
+\
+****************************** Database Details *******************************************\
+\
+\
+
+\b DataBase Related Task\
+
+\b0 \
+We will be creating 5 tables : -\
+1. User_MST ( Here MST stands for MasterTable - table that will have unique records and will not change is a masterTable )\
+2. Role_MST\
+3. Right_MST\
+\
+4. User_Role_MAPPING ( table to join two or more tables together is called Mapping Table ) \'97> here UserID and RoleID will be foreign key in 	User_Role_MAPPING table.\
+\
+5. Role_Right_MAPPING \'97> here RoleID and RightID will be foreign key in Role_Right_MAPPING table.\
+\
+\
+Now a detailed intro of each table :-\
+\
+
+\b 1. User_MST\
+\
+
+\b0 	This table will have following field: - 	1. 
+\b UID
+\b0  ( this will be a SERIAL \'97> that will be automatically generated and incremented when a new user register ) \'97> 
+\b Primary_Key
+\b0 \
+	2. FullName\
+	3. userID (or userRollNo)\
+	4. Password\
+	5. ConfirmPassword\
+	6. Gender RadioButton\
+	7. Email_Id\
+	8. City DropBox\
+	9. Status ( \'93Y/N\'94 , by Default - \'91Y\'92 ) \'97> no data is deleted from database even if user delete his account, in such case we will just make this flag to \'92N\'92 											              from \'91Y\'92 )\
+\
+
+\b 2. Role_MST\
+
+\b0 \
+	This table will have following field: - \
+	1. 
+\b RoleID 
+\b0 ( this will be a SERIAL \'97> that will be automatically generated and incremented when a new role is added to this table ) \'97> 
+\b Primary_Key
+\b0 \
+	2. RoleName ( Name of the role, eg: - Admin, Student, Teacher, HOD, etc )\
+	3. RoleDesc ( this will be a short description of the role )\
+	4. Status \
+\
+\
+
+\b 3. Right_MST\
+
+\b0 	\
+	This table will have following field: - \
+	1. 
+\b RightID 
+\b0 ( this will be a SERIAL \'97> that will be automatically generated and incremented when a new right is added to this table ) \'97> 
+\b Primary_Key
+\b0 \
+	2. RightName ( Name of right, eg: - Uploading Test, Taking Test, Uploading Assignment, Removing Teacher, Adding Teacher, etc )\
+	3. RightDesc (Optional \'97> this will give a short desc about what this right can do )\
+	4. Status \
+\
+\
+
+\b 4. User_Role_MAPPING\
+
+\b0 	\
+	This table will have following field: - \
+\
+	1. 
+\b MapID
+\b0  ( or User_Role_ID )\'97> ( this will be a SERIAL \'97> that will be automatically generated and incremented when a new right is added to this 										             table ) \'97> 
+\b Primary_Key
+\b0 \
+\
+	2. UID \'97> this will have the 
+\b UID 
+\b0 ID that will be a \ul foreign_Key\ulnone  here in this table and we are using this so that we can link the User_MST table to 					    Role_MST table, that is to make a relationship between the two tables using Join.\
+\
+	3. RoleID \'97> this will have the 
+\b RoleID
+\b0  that will be a \ul foreign_Key\ulnone  here in this table and we are using this so that we can link the User_MST table to 					    Role_MST table, that is to make a relationship between the two tables using Join.\
+\
+	4. Status\
+\
+\
+
+\b 5. Role_Right_MAPPING\
+
+\b0 	\
+	This table will have following field: - \
+\
+	1. 
+\b MapID
+\b0  ( or Role_Right_ID )\'97> ( this will be a SERIAL \'97> that will be automatically generated and incremented when a new mapping is done ) \
+												    \'97> 
+\b Primary_Key
+\b0 \
+\
+	2. RoleID \'97> this will have the 
+\b RoleID
+\b0  that will be a \ul foreign_Key\ulnone  here in this table and we are using this so that we can link the Role_MST table to 					    RIGHT_MST table, that is to make a relationship between the two tables using Join.\
+\
+	3. RightID \'97> this will have the 
+\b RightID 
+\b0 ID that will be a \ul foreign_Key\ulnone  here in this table and we are using this so that we can link the Role_MST table to 					    RIGHT_MST table, that is to make a relationship between the two tables using Join.\
+\
+	4. Status\
+\
+\
+\
+****************************** Cases For Type of User *******************************************\
+\
+\
+
+\b Case-1 )
+\b0  If User is TEACHER\
+	So in this Case he/she will have rights to Upload Test, See Results, Check No. Of students took exam, Upload Question of the Day/Week, etc (More \
+	features can also be added further)\
+\
+
+\b Case-2)
+\b0  If User is STUDENT\
+	So in this Case he/ she will have only right to Take Test, Check his Result only, Check Top-3 Toppers List, etc.\
+\
+
+\b Case-2)
+\b0  If User is ADMIN\
+	So in this case he/she will have right to Add Teacher, Remove Teacher, Upload Assignments, Upload Test, Can give additional right to others, etc.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
